@@ -1,7 +1,0 @@
-name: CoordSaver
-version: '1.0-SNAPSHOT'
-main: dev.joao_guilherme.coordSaver.CoordSaver
-api-version: '1.21'
-authors: [ João Guilherme ]
-description: CoordSaver is a survival friendly plugin that register your current location
-website: https://joaoguilherme.dev

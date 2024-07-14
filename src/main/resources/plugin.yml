@@ -1,0 +1,29 @@
+name: CoordSaver
+version: '1.0-SNAPSHOT'
+main: dev.joao_guilherme.coordSaver.CoordSaver
+api-version: '1.21'
+authors: [ João Guilherme ]
+description: CoordSaver is a survival friendly plugin that register your current location
+website: https://joaoguilherme.dev
+commands:
+  savecoord:
+    description: Salva a localização atual
+    usage: /savecoord <nome> [x] [y] [z]
+    alias:
+      - sc
+  coords:
+    description: Lista todas as coordenadas salvas
+    usage: /coords
+    alias:
+    - listcoords
+    - lc
+  getcoord:
+    description: Obtém a localização salva
+    usage: /getcoord <nome>
+    alias:
+      - gc
+  removecoord:
+    description: Remove a localização salva
+    usage: /removecoord <nome>
+    alias:
+      - rc
