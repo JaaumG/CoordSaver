@@ -17,7 +17,7 @@ import java.util.List;
 public class GetLocationCommand implements CommandExecutor, TabExecutor {
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         if (sender instanceof Player player) {
             if (args.length != 1) {
                 sender.sendMessage(Component.text("Você precisa especificar o nome da localização").color(NamedTextColor.RED));
