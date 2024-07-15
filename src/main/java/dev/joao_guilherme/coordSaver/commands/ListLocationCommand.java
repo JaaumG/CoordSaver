@@ -17,25 +17,33 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class ListLocationCommand implements CommandExecutor, TabExecutor {
+
+    final int MAX_LOCATIONS_PER_PAGE = 3;
+
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if (commandSender instanceof Player player) {
             if (strings.length == 0) {
                 List<Component> locations = LocationsUtils.listCoordinates(player).stream().map(Locations::toComponent).toList();
+
                 if (locations.isEmpty()) {
                     player.sendMessage(Component.text("Você não possui nenhuma localização salva!").color(NamedTextColor.RED));
                 } else {
-                    TextComponent text = Component.text("Suas coordenadas: \n").color(NamedTextColor.GOLD);
-                    for (Component location : locations) {
-                        text = text.append(location);
+                    Book.Builder bookBuilder = Book.builder()
+                            .title(Component.text("Coordenadas").color(NamedTextColor.GOLD))
+                            .author(Component.text("CoordSaver"));
+
+                    for (int i = 0; i < locations.size(); i += MAX_LOCATIONS_PER_PAGE) {
+                        TextComponent pageText = Component.text("Suas coordenadas: \n").color(NamedTextColor.GOLD);
+                        int end = Math.min(i + MAX_LOCATIONS_PER_PAGE, locations.size());
+                        List<Component> pageLocations = locations.subList(i, end);
+                        for (Component location : pageLocations) {
+                            pageText = pageText.append(location);
+                        }
+                        bookBuilder.addPage(pageText);
                     }
 
-                    Book book = Book.builder()
-                            .title(Component.text("Coordenadas").color(NamedTextColor.GOLD))
-                            .author(Component.text("CoordSaver"))
-                            .addPage(text).build();
-
-                    player.openBook(book);
+                    player.openBook(bookBuilder.build());
                 }
             }
         } else {
