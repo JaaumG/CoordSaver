@@ -33,9 +33,9 @@ public class SaveLocationCommand implements CommandExecutor, TabExecutor {
                     player.sendMessage(Component.text("O nome da localização já está em uso!").color(NamedTextColor.RED));
                     return true;
                 }
-                String x = new BigDecimal(strings[1]).setScale(2, RoundingMode.DOWN).toPlainString();
-                String y = new BigDecimal(strings[2]).setScale(2, RoundingMode.DOWN).toPlainString();
-                String z = new BigDecimal(strings[3]).setScale(2, RoundingMode.DOWN).toPlainString();
+                String x = new BigDecimal(strings[1].equals("~") ? String.valueOf(player.getLocation().getX()):strings[1]).setScale(2, RoundingMode.DOWN).toPlainString();
+                String y = new BigDecimal(strings[2].equals("~") ? String.valueOf(player.getLocation().getY()):strings[3]).setScale(2, RoundingMode.DOWN).toPlainString();
+                String z = new BigDecimal(strings[3].equals("~") ? String.valueOf(player.getLocation().getZ()):strings[2]).setScale(2, RoundingMode.DOWN).toPlainString();
                 LocationsUtils.saveCoordinate(player, locName, x, y, z);
                 player.sendMessage(Component.text("Localização salva com o nome: " + locName + " na posição " + x + ", " + y + ", " + z).color(NamedTextColor.GREEN));
             } else {
